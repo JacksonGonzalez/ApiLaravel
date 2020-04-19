@@ -7,6 +7,7 @@ use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\Post as PostResources;
+use App\Http\Resources\PostCollection;
 use App\Http\Requests\Post as PostRequests;
 
 class PostController extends Controller
@@ -27,7 +28,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json( 
+                new PostCollection(
+                    $this->post->orderBY('id', 'DESC')->get()
+                ));
     }
 
     /**
